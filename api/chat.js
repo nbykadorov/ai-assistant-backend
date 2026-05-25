@@ -1,5 +1,25 @@
 export default async function handler(req, res) {
 
+    res.setHeader(
+        'Access-Control-Allow-Origin',
+        '*'
+    );
+
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type'
+    );
+
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'POST, OPTIONS'
+    );
+
+    if (req.method === 'OPTIONS') {
+
+        return res.status(200).end();
+    }
+
     if (req.method !== 'POST') {
 
         return res.status(405).json({
@@ -31,14 +51,19 @@ export default async function handler(req, res) {
                 headers: {
                     'Authorization':
                         `Bearer ${process.env.OPENROUTER_API_KEY}`,
+
                     'Content-Type':
                         'application/json',
+
                     'HTTP-Referer':
-                        'https://your-site.com',
+                        'https://urban-estate.ru',
+
                     'X-Title':
                         'Tilda AI Assistant'
                 },
+
                 body: JSON.stringify({
+
                     model:
                         model ||
                         'deepseek/deepseek-chat-v3-0324:free',
@@ -49,6 +74,8 @@ export default async function handler(req, res) {
         );
 
         const data = await response.json();
+
+        console.log(data);
 
         return res.status(200).json(data);
 
