@@ -35,19 +35,6 @@ export default async function handler(req, res) {
             model
         } = req.body;
 
-        console.log('FROM TILDA:', password);
-
-        console.log(
-            'FROM VERCEL:',
-            process.env.ADMIN_PASSWORD
-        ); {
-
-
-            // return res.status(401).json({
-            //     error: 'Unauthorized'
-            // });
-        }
-
         const response = await fetch(
             'https://openrouter.ai/api/v1/chat/completions',
             {
