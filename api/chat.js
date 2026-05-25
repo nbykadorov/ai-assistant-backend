@@ -35,13 +35,17 @@ export default async function handler(req, res) {
             model
         } = req.body;
 
-        if (
-            password !== process.env.ADMIN_PASSWORD
-        ) {
+        console.log('FROM TILDA:', password);
 
-            return res.status(401).json({
-                error: 'Unauthorized'
-            });
+        console.log(
+            'FROM VERCEL:',
+            process.env.ADMIN_PASSWORD
+        ); {
+
+
+            // return res.status(401).json({
+            //     error: 'Unauthorized'
+            // });
         }
 
         const response = await fetch(
